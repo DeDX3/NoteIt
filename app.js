@@ -86,22 +86,30 @@ function addNote(e) {
 
 function removeNote(e) {
   if (e.target.parentElement.classList.contains("delete-item")) {
-    confirm("Are You Sure?");
+    const confirmOne = confirm("Are You Sure?");
 
-    e.target.parentElement.parentElement.remove();
+    if (confirmOne) {
+      e.target.parentElement.parentElement.remove();
 
-    Notes = JSON.parse(localStorage.getItem("notes"));
-    const delNote = e.target.parentElement.parentElement.getAttribute("value");
+      Notes = JSON.parse(localStorage.getItem("notes"));
+      const delNote = e.target.parentElement.parentElement.getAttribute(
+        "value"
+      );
 
-    Notes.splice(Notes.indexOf(delNote), 1);
-    localStorage.setItem("notes", JSON.stringify(Notes));
+      Notes.splice(Notes.indexOf(delNote), 1);
+      localStorage.setItem("notes", JSON.stringify(Notes));
+    }
   }
 }
 
 function removeAllNotes(e) {
-  confirm("Are You Sure?");
-  while (notesList.firstChild) {
-    notesList.firstChild.remove();
-    localStorage.removeItem("notes");
+  if (e.target.classList.contains("clear-notes")) {
+    const confirmAll = confirm("Are You Sure?");
+    if (confirmAll) {
+      while (notesList.firstChild) {
+        notesList.firstChild.remove();
+        localStorage.removeItem("notes");
+      }
+    }
   }
 }

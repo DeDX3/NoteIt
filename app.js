@@ -102,6 +102,6 @@ function removeAllNotes(e) {
   confirm("Are You Sure?");
   while (notesList.firstChild) {
     notesList.firstChild.remove();
+    localStorage.removeItem("notes");
   }
-  localStorage.removeItem("notes");
 }

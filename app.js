@@ -8,6 +8,7 @@ let Notes = [];
 form.addEventListener("submit", addNote);
 notesList.addEventListener("click", removeNote);
 removeBtn.addEventListener("click", removeAllNotes);
+filter.addEventListener("keyup", filterTasks);
 
 // Add Note on Enter keyPress
 document.addEventListener("keydown", function (e) {
@@ -80,8 +81,6 @@ function addNote(e) {
   } else {
     alert("Note Should Not Be Empty!");
   }
-
-  e.preventDefault();
 }
 
 function removeNote(e) {
@@ -112,4 +111,17 @@ function removeAllNotes(e) {
       }
     }
   }
+}
+
+function filterTasks(e) {
+  const text = e.target.value.toLowerCase();
+
+  notesList.querySelectorAll(".collection-item").forEach(function (note) {
+    const item = note.firstChild.textContent;
+    if (item.toLowerCase().indexOf(text) != -1) {
+      note.style.display = "block";
+    } else {
+      note.style.display = "none";
+    }
+  });
 }
